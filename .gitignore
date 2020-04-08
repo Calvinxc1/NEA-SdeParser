@@ -133,3 +133,4 @@ dmypy.json
 *-dev.ipynb
 settings/
 /sde_files/
+/unzip/
