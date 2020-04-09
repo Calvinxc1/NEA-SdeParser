@@ -1,5 +1,4 @@
 import pandas as pd
-from sqlalchemy.orm import sessionmaker
 from tqdm.notebook import tqdm, trange
 import yaml as ym
 
@@ -30,7 +29,7 @@ class InventoryLoader(Loader):
         }
     }
     delete_sequence = [
-        Type, Group, Category, MarketGroup
+        Type, Group, Category, MarketGroup, Reprocess
     ]
     reproc_skips = [
         53839, 53853, 53854, 53855, 53856, 53857, 53890, 53891, 53892,
@@ -95,20 +94,13 @@ class InventoryLoader(Loader):
             filtered_structure.append(new_row)
         return filtered_structure
         
-    def process_data(self):
-        Session = sessionmaker(bind=self.engine)
-        session = Session()
-        self.delete_old_data(session)
-        self.load_new_data(session)
-        session.close()
-        
-    def delete_old_data(self, session):
+    def delete_old_data(self, conn):
         for schema in self.delete_sequence:
-            session.query(schema).delete()
-        session.commit()
+            conn.query(schema).delete()
+        conn.commit()
         
-    def load_new_data(self, session):
+    def load_new_data(self, conn):
         for key, data_list in self.data.items():
-            session.bulk_save_objects(data_list)
-        session.commit()
+            conn.bulk_save_objects(data_list)
+        conn.commit()
         

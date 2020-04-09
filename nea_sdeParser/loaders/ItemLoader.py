@@ -1,4 +1,3 @@
-from sqlalchemy.orm import sessionmaker
 from tqdm.notebook import tqdm, trange
 import yaml as ym
 
@@ -21,18 +20,11 @@ class ItemLoader(Loader):
             for data_file in data:
                 self.data.append(Name.sde_parse(data_file))
         
-    def process_data(self):
-        Session = sessionmaker(bind=self.engine)
-        session = Session()
-        self.delete_old_data(session)
-        self.load_new_data(session)
-        session.close()
+    def delete_old_data(self, conn):
+        conn.query(Name).delete()
+        conn.commit()
         
-    def delete_old_data(self, session):
-        session.query(Name).delete()
-        session.commit()
-        
-    def load_new_data(self, session):
-        session.bulk_save_objects(self.data)
-        session.commit()
+    def load_new_data(self, conn):
+        conn.bulk_save_objects(self.data)
+        conn.commit()
         
