@@ -1,4 +1,3 @@
-from sqlalchemy.orm import sessionmaker
 from tqdm.notebook import tqdm, trange
 import yaml as ym
 
@@ -100,20 +99,13 @@ class MapLoader(Loader):
                         }
                         self.data['stargates'].append(Stargate.sde_parse(stargate_data))
         
-    def process_data(self):
-        Session = sessionmaker(bind=self.engine)
-        session = Session()
-        self.delete_old_data(session)
-        self.load_new_data(session)
-        session.close()
-        
-    def delete_old_data(self, session):
+    def delete_old_data(self, conn):
         for schema in self.delete_sequence:
-            session.query(schema).delete()
-        session.commit()
+            conn.query(schema).delete()
+        conn.commit()
         
-    def load_new_data(self, session):
+    def load_new_data(self, conn):
         for data_list in self.data.values():
-            session.bulk_save_objects(data_list)
-        session.commit()
+            conn.bulk_save_objects(data_list)
+        conn.commit()
         

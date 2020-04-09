@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+    sde:
+        build: .
+        container_name: nea-sde
+        volumes:
+        - ./config.py:/srv/app/config.py
+        - ./gunicorn.py:/srv/app/gunicorn.py
+        ports:
+        - 52720:8000
+        networks:
+        - karan.local.newedenanalytics.net
+        restart: unless-stopped
+        
+networks:
+    karan.local.newedenanalytics.net:
+        external: true

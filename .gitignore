@@ -134,3 +134,4 @@ dmypy.json
 settings/
 /sde_files/
 /unzip/
+/config.py

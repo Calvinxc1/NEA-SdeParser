@@ -7,13 +7,13 @@ from pathlib import Path
 from shutil import rmtree
 import zipfile as zf
 
+from ..ETL import ETL
+
 class SDE(Resource):
-    def __init__(self, unzip_dir):
-        self.unzip_path = self._build_unzip_path(unzip_dir)
-        
-    def _build_unzip_path(self, unzip_dir):
-        unzip_path = Path(unzip_dir)
-        return unzip_path
+    def __init__(self, config):
+        self.sde_path = Path(config.sde_path)
+        self.sql_params = config.sql_params
+        self.verbose = config.verbose
         
     def post(self):
         data = request.get_data()
@@ -26,15 +26,16 @@ class SDE(Resource):
     
     def _load_sde(self, data):
         self._unzip_data(data)
-        
+        self._etl_data()
     
     def _unzip_data(self, data):
         zip_data = zf.ZipFile(io.BytesIO(data))
         
-        if self.unzip_path.exists():
-            rmtree(self.unzip_path)
+        if self.sde_path.exists():
+            rmtree(self.sde_path)
             
-        zip_data.extractall(self.unzip_path)
+        zip_data.extractall(self.sde_path)
         
     def _etl_data(self):
-        
+        etl = ETL(self.sde_path, self.sql_params, self.verbose)
+        etl.run_etl()
