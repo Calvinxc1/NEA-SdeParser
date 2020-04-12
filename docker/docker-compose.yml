@@ -7,6 +7,8 @@ services:
             dockerfile: ./docker/dev.Dockerfile
             args:
                 branch: feature-RefactorSchema
+            cache_from:
+            - python:3-slim
         container_name: nea-sde
         volumes:
         - ./../config/config.py:/srv/app/config.py
