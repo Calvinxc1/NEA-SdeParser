@@ -1,6 +1,6 @@
-ARG BRANCH=develop
-
 FROM python:3-slim
+
+ARG branch=develop
 
 RUN apt-get update \
     && apt-get install -y git \
@@ -9,7 +9,7 @@ RUN apt-get update \
 WORKDIR /srv/app
 
 RUN git clone -b develop https://github.com/Calvinxc1/NEA-Schema.git \
-    && git clone -b ${BRANCH} https://github.com/Calvinxc1/NEA-SdeParser.git \
+    && git clone -b $branch https://github.com/Calvinxc1/NEA-SdeParser.git \
     && python -m pip install --no-cache-dir ./NEA-Schema \
     && python -m pip install --no-cache-dir ./NEA-SdeParser \
     && rm -rf ./NEA-Schema \

@@ -6,7 +6,7 @@ services:
             context: ./../
             dockerfile: ./docker/dev.Dockerfile
             args:
-                BRANCH: feature-RefactorSchema
+                branch: feature-RefactorSchema
         container_name: nea-sde
         volumes:
         - ./../config/config.py:/srv/app/config.py
