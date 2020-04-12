@@ -131,7 +131,5 @@ dmypy.json
 
 # Custom ignores
 *-dev.ipynb
-settings/
 /sde_files/
-/unzip/
-/config.py
+/config/
