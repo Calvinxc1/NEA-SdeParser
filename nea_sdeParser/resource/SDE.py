@@ -4,8 +4,8 @@ from hashlib import sha256
 from multiprocessing import Process
 from shutil import rmtree
 
-from .. import ETL
-from .. import Unzipper
+from ..ETL import ETL
+from ..Unzipper import Unzipper
 
 class SDE(Resource):
     def __init__(self, sde_path, sql_params, verbose=False):
@@ -23,6 +23,6 @@ class SDE(Resource):
         return {'hash': data_hash}, 202
     
     def _load_sde(self, data):
-        Unzipper(self.sde_path, self.verbose).unzip_sde()
+        Unzipper(self.sde_path, self.verbose).unzip_sde(data)
         ETL(self.sde_path, self.sql_params, self.verbose).run_etl()
         rmtree(self.sde_path)

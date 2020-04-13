@@ -22,6 +22,7 @@ setuptools.setup(
         'flask-restful >= 0.3, < 1',
         'gunicorn >= 20.0, < 21',
         'pandas >= 1.0, < 2',
+        'pymysql >= 0.9, < 1',
         'pyyaml >= 5.3, < 6',
         'tqdm >= 4.45, < 5',
     ],
