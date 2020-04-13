@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+    sde:
+        image: nea-sde-parser
+        build:
+            context: ./
+            dockerfile: ./dev.Dockerfile
+        container_name: nea-sde-parser
+        volumes:
+        - ./config/config.py:/srv/app/config/config.py
+        - ./config/gunicorn.py:/srv/app/config/gunicorn.py
+        ports:
+        - 52720:8000
+        networks:
+        - karan.local.newedenanalytics.net
+        restart: unless-stopped
+        
+networks:
+    karan.local.newedenanalytics.net:
+        external: true

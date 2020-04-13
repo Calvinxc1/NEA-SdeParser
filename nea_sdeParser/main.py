@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Api
 
 from .resource import SDE
-from config import sde_path, sql_params, verbose
+from config.config import sde_path, sql_params, verbose
 
 app = Flask(__name__)
 api = Api(app)
