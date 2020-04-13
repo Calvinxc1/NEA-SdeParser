@@ -2,11 +2,15 @@ version: '3.7'
 
 services:
     sde:
-        build: .
+        build:
+            context: ./../
+            dockerfile: ./docker/dev.Dockerfile
+            args:
+                branch: feature-RefactorSchema
         container_name: nea-sde
         volumes:
-        - ./config.py:/srv/app/config.py
-        - ./gunicorn.py:/srv/app/gunicorn.py
+        - ./../config/config.py:/srv/app/config.py
+        - ./../config/gunicorn.py:/srv/app/gunicorn.py
         ports:
         - 52720:8000
         networks:

@@ -1,4 +1,3 @@
-from .ItemLoader import ItemLoader
+from .BlueprintLoader import BlueprintLoader
 from .InventoryLoader import InventoryLoader
 from .MapLoader import MapLoader
-from .BlueprintLoader import BlueprintLoader

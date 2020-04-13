@@ -2,12 +2,12 @@ from flask import Flask
 from flask_restful import Api
 
 from .resource import SDE
-import config
+from config import sde_path, sql_params, verbose
 
 app = Flask(__name__)
 api = Api(app)
 
 api.add_resource(
-    SDE, '/sde',
-    resource_class_args=[config],
+    SDE, '/',
+    resource_class_args=[sde_path, sql_params, verbose],
 )

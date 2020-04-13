@@ -24,11 +24,13 @@ setuptools.setup(
         'pandas >= 1.0, < 2',
         'pymysql >= 0.9, < 1',
         'pyyaml >= 5.3, < 6',
-        'sqlalchemy >= 1.3, < 2',
         'tqdm >= 4.45, < 5',
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'Operating System :: OS Independent',
+        'Development Status :: 2 - Pre-Alpha',
     ],
     python_requires='>= 3.5',
 )
