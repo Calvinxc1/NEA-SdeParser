@@ -2,7 +2,7 @@ from tqdm.notebook import tqdm, trange
 import yaml as ym
 
 from .BaseLoader import Loader
-from nea_schema.sde.map import Region, Constellation, System, Planet, Moon, Belt, Station, Stargate
+from nea_schema.maria.sde.map import Region, Constellation, System, Planet, Moon, Belt, Station, Stargate
 
 class MapLoader(Loader):
     data_path = 'sde/fsd/universe'

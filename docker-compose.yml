@@ -6,6 +6,8 @@ services:
         build:
             context: ./
             dockerfile: ./dev.Dockerfile
+            args:
+                schema_branch: develop
         container_name: nea-sde-parser
         volumes:
         - ./config/config.py:/srv/app/config/config.py

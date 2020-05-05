@@ -3,7 +3,7 @@ from tqdm.notebook import tqdm, trange
 import yaml as ym
 
 from .BaseLoader import Loader
-from nea_schema.sde.bp import Blueprint, Activity, Material, Product, Skill
+from nea_schema.maria.sde.bp import Blueprint, Activity, Material, Product, Skill
 
 class BlueprintLoader(Loader):
     data_path = 'sde/fsd/blueprints.yaml'
