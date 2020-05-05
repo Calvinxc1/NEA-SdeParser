@@ -3,7 +3,7 @@ from tqdm.notebook import tqdm, trange
 import yaml as ym
 
 from .BaseLoader import Loader
-from nea_schema.sde.inv import Name, Category, Group, Type, MarketGroup, Reprocess
+from nea_schema.maria.sde.inv import Name, Category, Group, Type, MarketGroup, Reprocess
 
 class InventoryLoader(Loader):
     data_paths = {
